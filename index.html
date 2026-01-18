@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, #ffe6f0 0%, #fff5f9 50%, #ffebf0 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .petal {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 105, 180, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffe6f0 0%, #fff5f9 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .password-screen.hidden {
+            display: none;
+        }
+
+        .password-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
+        }
+
+        .password-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            color: #d63384;
+            margin-bottom: 10px;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 105, 180, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(255, 105, 180, 0.8); }
+        }
+
+        .password-subtitle {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .password-input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .password-input {
+            width: 300px;
+            padding: 15px 20px;
+            border: 2px solid #ffb3d9;
+            border-radius: 10px;
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #d63384;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            background: #fff;
+        }
+
+        .heart-beat {
+            position: absolute;
+            font-size: 24px;
+            animation: heartbeat 1s infinite;
+        }
+
+        .heart-left {
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .heart-right {
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1) translateY(-50%); }
+            50% { transform: scale(1.2) translateY(-50%); }
+        }
+
+        .password-btn {
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #ff69b4, #d63384);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Lora', serif;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .password-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            text-align: center;
+            min-height: 20px;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.visible {
+            display: block;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(255, 105, 180, 0.1);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #d63384;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 105, 180, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            padding: 120px 20px 50px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 64px;
+            color: #d63384;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+        }
+
+        .header p {
+            font-size: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        section {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.1);
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #d63384;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+            animation: expand 2s ease infinite;
+        }
+
+        @keyframes expand {
+            0%, 100% { width: 60px; }
+            50% { width: 100px; }
+        }
+
+        .love-letter {
+            background: linear-gradient(135deg, #fff9f5, #fff5f9);
+            padding: 30px;
+            border-left: 4px solid #ff69b4;
+            border-radius: 10px;
+            font-style: italic;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .love-letter textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid #ffb3d9;
+            border-radius: 10px;
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            resize: vertical;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .birthday-content {
+            text-align: center;
+        }
+
+        .cake {
+            font-size: 100px;
+            margin: 20px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .birthday-message {
+            font-size: 24px;
+            color: #d63384;
+            font-family: 'Great Vibes', cursive;
+            margin: 20px 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #ff69b4, #ffb3d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quote {
+            text-align: center;
+            font-size: 22px;
+            color: #d63384;
+            font-style: italic;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            background: rgba(255, 192, 203, 0.1);
+            animation: fadeInQuote 1s ease;
+        }
+
+        @keyframes fadeInQuote {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .reason-card {
+            background: linear-gradient(135deg, #fff9f5, #fff5f9);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reason-card:hover {
+            transform: rotateY(10deg);
+            border-color: #ff69b4;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+        }
+
+        .reason-text {
+            font-size: 18px;
+            color: #d63384;
+            font-weight: 600;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #ff69b4, #ffb3d9);
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: 52%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 52%;
+            margin-right: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #ff69b4;
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.3);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(255, 192, 203, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .timeline-date {
+            color: #d63384;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .timeline-description {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .secret-heart {
+            text-align: center;
+            font-size: 80px;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .secret-heart:hover {
+            transform: scale(1.2);
+        }
+
+        .secret-message {
+            max-height: 0;
+            overflow: hidden;
+            text-align: center;
+            font-size: 20px;
+            color: #d63384;
+            font-style: italic;
+            transition: max-height 0.5s ease;
+            margin-top: 20px;
+        }
+
+        .secret-message.revealed {
+            max-height: 200px;
+        }
+
+        .promises-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .promise {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ffb3d9;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #555;
+            font-size: 18px;
+            animation: slideInPromise 0.5s ease;
+        }
+
+        @keyframes slideInPromise {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff69b4, #d63384);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            z-index: 50;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #d63384;
+            font-family: 'Great Vibes', cursive;
+            font-size: 24px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 40px;
+            }
+
+            section {
+                margin: 40px 10px;
+                padding: 25px;
+            }
+
+            .password-input {
+                width: 250px;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 50px;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 0;
+            }
+
+            .music-control {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="petal-container"></div>
+
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-container">
+            <div class="password-title">💕</div>
+            <h2 style="font-family: 'Great Vibes', cursive; color: #d63384; font-size: 32px;">Locked hai Password socho</h2>
+            <p class="password-subtitle">Password my Dear janemn</p>
+            <div class="password-input-group">
+                <span class="heart-beat heart-left">💗</span>
+                <input type="password" id="passwordInput" class="password-input" placeholder="•••••••" autocomplete="off">
+                <span class="heart-beat heart-right">💗</span>
+            </div>
+            <button class="password-btn" onclick="checkPassword()">Hehe Enter</button>
+            <div class="error-message" id="errorMessage"></div>
+        </div>
+    </div>
+
+    <div class="content" id="mainContent">
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#love-letter">Love Letter</a>
+            <a href="#birthday">Birthday</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#quotes">Quotes</a>
+            <a href="#reasons">Reasons</a>
+            <a href="#timeline">Timeline</a>
+            <a href="#secret">Secret</a>
+            <a href="#promises">Promises</a>
+        </nav>
+
+        <div class="header" id="home">
+            <h1>Happy Birthday, Anu Baby💕</h1>
+            <p>19 Jan ko Paida hone ke liye dhnyawaad Hehe</p>
+            <div style="margin-top: 30px; font-size: 40px;">
+                <span class="floating-heart" style="left: 10%; animation-delay: 0s;">💕</span>
+                <span class="floating-heart" style="left: 90%; animation-delay: 1s;">💕</span>
+                <span class="floating-heart" style="left: 50%; animation-delay: 2s;">💕</span>
+            </div>
+        </div>
+
+        <section id="love-letter">
+            <h2>💌 Love Letter</h2>
+            <div class="love-letter">
+                <p>My dear darling ji,</p>
+                <p>Dekho mai love letter likhen mai itna acha ni hu to mai bss apni feelings he bata rha hu(mtlb isko bss thank you letter socho)
+                    thank you my dear darling mera sath dene ke liye, pichle kafi saalo se hmne dai ke, khoob ldai ke, bhut ldai ke hehe, prr kabhi ek dusre ko ni choda
+                    chodne ka socha ni kafi bar ek dusre ko hurt kiya prr apne mujhe smjhaya ya kudko smjhaya uske liye bhut zyada thank you...
+                and Sorry mujhe pta hai hmari kafi time se thik dhng se baat ni hori ulta ldai alg ho jati hai sorry aaj kal time ni nikal pata nikalta hu to meri communication skills uff
+                fir ldai krwa jati hai hehe sorry mai try kruga hmesha available rhne ki koshish hehe fir glti hogi fir mujhe dant dena chodke mtt jana 
+                I love you so much my dear Anu Baby💕hehe    
+                </p>
+            </div>
+            <textarea placeholder="Write your personal love letter here..."></textarea>
+        </section>
+
+        <section id="birthday">
+            <h2>🎂 Happy Birthday Baby💕</h2>
+            <div class="birthday-content">
+                <div class="cake">🎂</div>
+                <div class="birthday-message">Mubarak ho :) hehe madam ji 18 saal ke ho gyi hehe. hmm coding ko kabhi mtt chodna 
+                    apun rhe ya na rhe ye tere sath hmesha rhege hehe......
+                </div>
+                <p style="font-size: 18px; color: #666; margin-top: 20px;">
+                    Or ha agar ho ske mujhe bhi kabhi mtt bhulna I am sarif bacha hehe💕
+                </p>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>📸Memories</h2>
+            <div class="gallery">
+                <div class="gallery-item"><img src="images/img1.jpg" alt="1"></div>
+                <div class="gallery-item"><img src="images/img2.jpg" alt="2"></div>
+                <div class="gallery-item"><img src="images/img3.jpg" alt="3"></div>
+                <div class="gallery-item"><img src="images/img4.jpg" alt="4"></div>
+                <div class="gallery-item"><img src="images/img5.jpg" alt="5"></div>
+                <div class="gallery-item"><img src="images/img6.jpg" alt="6"></div>
+            </div>
+            <p style="text-align: center; color: #999; margin-top: 20px; font-size: 14px;">Click on items to add your photos</p>
+        </section>
+
+        <section id="quotes">
+            <h2>✨ Romantic lines hehe💕</h2>
+            <div class="quote">
+                "Tere bina jee na payenge hum, Tere bina mar bhi na paye hmm, khokar kudko tujhme kudko bhulaye jaye hmm"
+            </div>
+            <div class="quote">
+                "Jb jb teri pic dekho dil mai kuch kuch hota jaye. jab jab teri pic dekho dil mai kuch kuch hota jaye.bhut hua sabar ab ek dusre ka hoya jaye."
+            </div>
+            <div class="quote">
+                "10Rupee wala Chaomin burger khane wala kabhi buddha ni hota."
+            </div>
+        </section>
+
+        <section id="reasons">
+            <h2>💖 Reasons I Love You</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-text">Your smile</div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-text">Your kindness</div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-text">The way you understand me</div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-text">Your laugh</div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-text">My dear hehe</div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-text">Everything about you</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline">
+            <h2>🕰️ Timeline of Us</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">1st year</div>
+                        <div class="timeline-description">Ni assi phele saal yari layi</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2nd year</div>
+                        <div class="timeline-description">Ni assi duje saal yari nibhai</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">3rd year</div>
+                        <div class="timeline-description">Tija saal ande ande sanu pyar ho gya hehe💕</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="secret">
+            <h2>🔐 Secret Message</h2>
+            <div style="text-align: center;">
+                <div class="secret-heart" onclick="revealSecret()">💌</div>
+                <div class="secret-message" id="secretMessage">
+                    Kabhi chodke nhi jaoga  puri try rishta nibhane ke💕
+                </div>
+            </div>
+        </section>
+
+        <section id="promises">
+            <h2>🤍 My Promises to You</h2>
+            <div class="promises-list">
+                <div class="promise">Apun rhega tere naal<div>
+                <div class="promise">Apun nhi bdlega Baby</div>
+                <div class="promise">Hor koi bich mai nhi ayega Baby</div>
+                <div class="promise">Hmesha sath nibhaya jayega</div>
+                <div class="promise">Galaxy ke ksm hehe apko pta hai galaxy kon hai</div>
+            </div>
+        </section>
+
+        <footer>
+           Dil se Acha lgta hai ❤️
+        </footer>
+
+        <button class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <script>
+        const CORRECT_PASSWORD = "stranger";
+
+        function createPetals() {
+            const container = document.getElementById('petal-container');
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                petal.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(petal);
+            }
+
+            setInterval(() => {
+                const petals = document.querySelectorAll('.petal');
+                petals.forEach(petal => {
+                    petal.style.left = Math.random() * 100 + '%';
+                    petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                });
+            }, 10000);
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value.toLowerCase();
+            const errorMsg = document.getElementById('errorMessage');
+
+            if (input === CORRECT_PASSWORD) {
+                document.getElementById('passwordScreen').classList.add('hidden');
+                document.getElementById('mainContent').classList.add('visible');
+                errorMsg.textContent = '';
+            } else if (input.length > 0) {
+                errorMsg.textContent = 'This heart is not meant for you 💔';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') checkPassword();
+            });
+        });
+
+        function revealSecret() {
+            const secret = document.getElementById('secretMessage');
+            secret.classList.toggle('revealed');
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
+            btn.textContent = btn.textContent === '🎵' ? '🔇' : '🎵';
+        }
+
+        window.addEventListener('load', createPetals);
+    </script>
+</body>
+</html>
